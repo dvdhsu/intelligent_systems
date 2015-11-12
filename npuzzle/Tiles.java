@@ -1,5 +1,6 @@
 package npuzzle;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -32,6 +33,24 @@ public class Tiles implements State {
 		emptyTileRow = emptyRow;
 		emptyTileColumn = emptyColumn;
 	}
+	
+	public boolean equals(Object that) {
+		if (that instanceof Tiles) {
+			Tiles t = (Tiles) that;
+			return Arrays.equals(this.tiles, t.tiles);
+		} else {
+			return false;
+		}
+	}
+	
+	public int hashCode() {
+		int result = 0;
+		for (int i = 0; i < this.tiles.length; i++) {
+			result += this.tiles[i] * (31 ^ i);
+		}
+		return result;
+	}
+
 	protected Tiles(int width, int[] tiles, int emptyTileRow, int emptyTileColumn) {
 		this.width = width;
 		this.tiles = tiles;

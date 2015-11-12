@@ -9,7 +9,7 @@ public class City {
 	protected final String name;
 	protected final Set<Road> outgoingRoads;
 	protected final Map<City,Integer> shortestDistanceByCity;
-
+	
 	public City(String name) {
 		this.name = name;
 		this.outgoingRoads = new LinkedHashSet<Road>();
@@ -28,5 +28,20 @@ public class City {
 			return Integer.MAX_VALUE;
 		else
 			return distance.intValue();
+	}
+	
+	public boolean equals(Object o) {
+		if (o instanceof City) {
+			City c = (City) o;
+			return this.name.equals(c.name);
+		} else {
+			return false;
+		}
+	}
+	
+	public int hashCode() {
+		// this will be the same, as long as the strings are equal
+		// http://stackoverflow.com/questions/785091/consistency-of-hashcode-on-a-java-string
+		return this.name.hashCode();
 	}
 }
